@@ -35,7 +35,7 @@ export default function RootLayout({
           <Header />
           <div className="flex items-start gap-20 pt-20">
             <Sidebar />
-            <div className="">
+            <div className="w-full">
               {children}
             </div>
           </div>

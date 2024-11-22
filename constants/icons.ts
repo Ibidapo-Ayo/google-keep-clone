@@ -1,4 +1,4 @@
-import { Archive, Bell, Edit, Hexagon, Lightbulb, Trash } from "lucide-react";
+import { Archive, Bell, Edit, Hexagon, Lightbulb, Trash, Brush, CheckSquare2, Image, } from "lucide-react";
 
 
 
@@ -26,5 +26,21 @@ export const sideBarItems = [
     {
         text: "Bin",
         Icon: Trash
+    }
+]
+
+export const preInputIcons = [
+    {
+        Icon: CheckSquare2,
+        action: "list"
+    },
+    {
+        Icon: Brush,
+        action: "not-allowed"
+    },
+
+    {
+        Icon: Image,
+        action: "image"
     }
 ]
