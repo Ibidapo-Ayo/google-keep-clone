@@ -33,7 +33,7 @@ export default function RootLayout({
       >
         <GoogleKeepContextProvider>
           <Header />
-          <div className="flex items-start gap-20">
+          <div className="flex items-start gap-20 pt-20">
             <Sidebar />
             <div className="">
               {children}

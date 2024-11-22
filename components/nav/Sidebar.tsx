@@ -4,7 +4,7 @@ import { GoogleKeepCloneContext } from '@/context/GoogleKeepContext'
 import React, { useContext, useState } from 'react'
 
 const Sidebar = () => {
-    const { expanded, setExpanded } = useContext(GoogleKeepCloneContext)
+    const { expanded} = useContext(GoogleKeepCloneContext)
 
     const [activeTab, setActiveTab] = useState(0)
     const [absoluteExpand, setAbsoluteExpand] = useState(false)
@@ -14,7 +14,7 @@ const Sidebar = () => {
     }
     return (
         <div className='top-20 min-h-[88vh] shadow-lg bg-white'>
-            <ul className={`flex-1 space-y-1 bg-white  ${absoluteExpand && !expanded ?"absolute w-72 shadow-lg h-[88vh]" : ""} ${expanded && "w-80"}`} onMouseEnter={() => {
+            <ul className={`flex-1 space-y-1 bg-white  ${absoluteExpand && !expanded ?"absolute w-64 shadow-lg h-[88vh]" : ""} ${expanded && "w-64"}`} onMouseEnter={() => {
                 setAbsoluteExpand(true)
             }}
 
