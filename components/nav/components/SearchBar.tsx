@@ -8,7 +8,7 @@ const SearchBar = () => {
     const [bg, setBg] = useState(true)
     usePageClick(setBg, "search-bar")
     return (
-        <div className={`flex flex-grow h-11 md:w-[75%] shadow-custom rounded-[10px] items-center px-3 cursor-pointer ${bg ? "bg-gray-200" : "bg-white"}`} id='search-bar' onClick={() => setBg(false)}>
+        <div className={`flex flex-grow h-11 md:w-[75%]  rounded-[10px] items-center px-3 cursor-pointer ${bg ? "bg-gray-100" : "bg-white shadow-custom"}`} id='search-bar' onClick={() => setBg(false)}>
             <Search className='text-gray-500 w-4' />
             <Input className="note-input border-none outline-none placeholder:tracking-wide placeholder:text-gray-500" placeholder='Search...' />
             {!bg && (

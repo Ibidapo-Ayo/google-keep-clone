@@ -13,7 +13,7 @@ const Sidebar = () => {
         setActiveTab(index)
     }
     return (
-        <div className='top-20 min-h-[88vh] shadow-lg bg-white'>
+        <div className='top-20 min-h-[88vh] bg-white pr-2'>
             <ul className={`flex-1 space-y-1 bg-white  ${absoluteExpand && !expanded ?"absolute w-64 shadow-lg h-[88vh]" : ""} ${expanded && "w-64"}`} onMouseEnter={() => {
                 setAbsoluteExpand(true)
             }}
@@ -25,9 +25,9 @@ const Sidebar = () => {
                     const { text, Icon } = items
                     return (
                         <li
-                            key={index} className={`sidebar ${activeTab === index ? "bg-amber-100 hover:bg-amber-100" : "hover:bg-gray-100"} ${expanded || absoluteExpand ? "rounded-r-full w-full" : "w-14 h-14 rounded-full text-center flex justify-center items-center"} `} onClick={() => handleActiveTab(index)}>
+                            key={index} className={`sidebar ${activeTab === index ? "bg-amber-100 hover:bg-amber-100" : "hover:bg-gray-100"} ${expanded || absoluteExpand ? "rounded-r-full w-full h-12" : "w-12 h-12 rounded-full text-center flex justify-center items-center"} `} onClick={() => handleActiveTab(index)}>
                             <div className={``}>
-                                <Icon className={`${!expanded && absoluteExpand && "ml-1"} text-xl`} />
+                                <Icon className={`${!expanded && absoluteExpand && "ml-1"} w-5`} />
                             </div>
                             <span className={`text ${!expanded && !absoluteExpand ? "hidden": "block"}`}>{text}</span>
                         </li>
