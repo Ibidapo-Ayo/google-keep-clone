@@ -26,8 +26,15 @@ const AddList = ({ value, setNotes, index, note, active, setActive }: {
 
     useEffect(() => {
         console.log(active);
-
     }, [active])
+
+    const handleRemoveListItems = () => {
+        if (note.listValue.length !== 1) {
+            setNotes({ ...note, listValue: note.listValue.filter((_, i) => index !== i) })
+        } else {
+           setNotes({...note, listValue: [{...note.listValue[0], text: ""}, ...note.listValue.slice(1)]})
+        }
+    }
 
     return (
         <div className={`${active === index ? "border-y" : "border-none"}`}>
@@ -44,10 +51,19 @@ const AddList = ({ value, setNotes, index, note, active, setActive }: {
                     <Plus className='w-3' />
                 )}
 
-                <Input ref={inputRef} className='placeholder:text-gray-400 placeholder:tracking-tighter placeholder:text-[14px] h-6 placeholder:font-normal text-[14px] w-full border-none outline-none' placeholder='List items' onInput={() => {
+                <Input ref={inputRef} value={value.text} name={`List-${index}`} className='placeholder:text-gray-400 placeholder:tracking-tighter placeholder:text-[14px] h-6 placeholder:font-normal text-[14px] w-full border-none outline-none' placeholder='List items'
+                onChange={(e) => {
+                  setNotes((prev: NoteTypes) => {
+                    const updated = {...prev}
+                    updated.listValue[index].text = e.target.value
+                    return updated
+                  })
+                }}
+                onInput={() => {
                     setIsTyping(true)
 
                     if (index === note.listValue.length - 1) {
+                        console.log(note.listValue)
                         setNotes({
                             ...note, listValue: [...note.listValue, {
                                 text: "",
@@ -60,13 +76,7 @@ const AddList = ({ value, setNotes, index, note, active, setActive }: {
 
 
                 {active === index && (
-                    <Button variant={"ghost"} className='rounded-full w-8 h-8 [&_svg]:size-3 hover:bg-gray-100' onClick={() => {
-                        if (note.listValue.length !== 1) {
-                            setNotes({ ...note, listValue: note.listValue.filter((_, i) => index !== i) })
-                        } else {
-                           setNotes({...note, listValue: [{...note.listValue[0], text: ""}, ...note.listValue.slice(1)]})
-                        }
-                    }}>
+                    <Button variant={"ghost"} className='rounded-full w-8 h-8 [&_svg]:size-3 hover:bg-gray-100' onClick={handleRemoveListItems}>
                         <X className='w-3' />
                     </Button>
                 )}
