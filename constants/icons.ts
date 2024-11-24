@@ -36,7 +36,7 @@ export const preInputIcons = [
     },
     {
         Icon: Brush,
-        action: "not-allowed"
+        action: "brush"
     },
 
     {

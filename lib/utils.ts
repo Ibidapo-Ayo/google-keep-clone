@@ -6,10 +6,26 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 
-export const autoGrow = (textarea: React.MutableRefObject<HTMLDivElement | null>) => {
+export const autoGrow = (textarea: React.MutableRefObject<HTMLTextAreaElement | null>) => {
   const { current } = textarea
   if (current) {
     current.style.height = "auto",
       current.style.height = current.scrollHeight + "px"
   }
+}
+
+export const noteDefault = {
+  title: "",
+  text: "",
+  reminder: "",
+  collaborator: [],
+  bgColor: "",
+  images: [],
+  archive: false,
+  pinned: false,
+  isAList: false,
+  listValue: [{
+    text: "",
+    completed: false
+  }]
 }

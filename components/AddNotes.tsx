@@ -1,20 +1,25 @@
 "use client"
-import React, { useEffect, useRef, useState } from 'react'
+import React, { act, useEffect, useRef, useState } from 'react'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
 import { preInputIcons } from '@/constants/icons'
 import { Textarea } from './ui/textarea'
-import { autoGrow } from '@/lib/utils'
+import { autoGrow, noteDefault } from '@/lib/utils'
 import { Pin, Bell } from 'lucide-react'
 import IconButtons from './notes/iconButtons'
+import AddList from './AddList'
+import { NoteTypes } from '@/types'
 
 
-type InputType = "note" | "list" | "image"
+type InputType = "note" | "list" | "image" | "brush"
 
 const AddNotes = () => {
-    const [inputType, setInputType] = useState<InputType>("note")
+    const [inputType, setInputType] = useState<InputType | string>("note")
     const [showEditor, setShowEditor] = useState<boolean>(false)
-    const textAreaRef = useRef(null)
+    const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
+
+    const [note, setNotes] = useState<NoteTypes>(noteDefault)
+    const [active, setActive] = useState<number | undefined>()
 
     useEffect(() => {
         document.body.addEventListener("click", (event) => {
@@ -36,39 +41,100 @@ const AddNotes = () => {
         };
     }, [])
 
+
+    useEffect(() => {
+        if (showEditor && textAreaRef.current) {
+            textAreaRef.current.focus();
+        }
+
+        if (!showEditor) {
+            if (note.title.trim() || note.text.trim()) {
+                setNotes(noteDefault)
+                saveNotes()
+            }
+
+            setInputType("note")
+        }
+    }, [showEditor])
+
+    const handleNotesChange = (e: any) => {
+        setNotes({ ...note, [e.target.name]: e.target.value })
+    }
+
+    const saveNotes = async () => {
+
+    }
+
+    const handleActions = (action: string) => {
+        setShowEditor(true)
+        setInputType(action)
+
+        if (action === "list") {
+            setNotes({ ...note, isAList: true })
+        }
+    }
+
+    const handleInputClick = () => {
+        if (inputType !== "list") {
+            setInputType("note")
+        }
+        setShowEditor(true)
+    }
+
+    const handlePinHandle = () => {
+        setNotes({ ...note, pinned: !note.pinned })
+    }
+
+
     return (
         <div className='max-w-xl mx-auto shadow-custom rounded-[5px] h-auto relative' id='add-tasks'>
             <div className='w-full grid grid-cols-[1fr,auto] gap-4 items-center px-2 rounded-lg'>
-                <Input type='text' placeholder={!showEditor ? "Take a note..." : "Title"} className='note-input rounded-md' onClick={() => {
-                    setShowEditor(true)
-                }} />
+                <Input type='text' value={note.title} name="title" onChange={handleNotesChange} placeholder={!showEditor ? "Take a note..." : "Title"} className='note-input rounded-md' onClick={handleInputClick} />
+
+
                 {!showEditor ? (
                     <div className='flex gap-1'>
                         {preInputIcons.map((icon, index) => {
                             const { Icon, action } = icon
 
                             return (
-                                <Button key={index} variant={"ghost"} size={"sm"} className={`rounded-full w-10 h-10 [&_svg]:size-5 [&_svg]:text-gray-500 hover:bg-gray-100 disabled:cursor-not-allowed`} disabled={action === "not-allowed"}>
+                                <Button key={index} variant={"ghost"} size={"sm"} className={`rounded-full w-10 h-10 [&_svg]:size-5 [&_svg]:text-gray-500 hover:bg-gray-100 disabled:cursor-not-allowed`} disabled={action === "not-allowed"} onClick={() => handleActions(action)}>
                                     <Icon />
                                 </Button>
                             )
                         })}
                     </div>
+
                 ) : (
-                    <Button variant={"ghost"} size={"icon"} className='rounded-full w-10 h-10 [&_svg]:size-5 [&_svg]:text-gray-500 hover:bg-gray-100'>
+                    <Button onClick={handlePinHandle} variant={"ghost"} size={"icon"} className={`rounded-full w-10 h-10 [&_svg]:size-5 [&_svg]:text-gray-500 hover:bg-gray-100 ${note.pinned && "bg-gray-100"}`}>
                         <Pin />
                     </Button>
                 )}
             </div>
 
+            <div className='flex flex-col w-full px-2 space-y-3'>
+                {showEditor && (
+                    inputType === "note" ? (
+                        <Textarea ref={textAreaRef} onChange={handleNotesChange} name='text' value={note.text} className='resize-none w-full note-input' placeholder='Take note' onInput={() => autoGrow(textAreaRef)} />
+                    ) : (
+                        <>
+                            {note.listValue.map((value, index) => (
+                                <AddList value={value} key={index} setNotes={setNotes} index={index} note={note} active={active} setActive={()=> setActive(index)} />
+                            ))}
+                        </>
+                    )
+                )}
 
-            {showEditor && (
-                <div className='flex flex-col w-full px-2 space-y-3 pb-2'>
-                    <Textarea ref={textAreaRef} className='resize-none w-full note-input' placeholder='Take note' onInput={() => autoGrow(textAreaRef)} />
+                {showEditor && (
+                    <div className='flex items-center justify-between'>
+                        <IconButtons />
+                        <Button variant={"ghost"} size={"sm"} className='hover:bg-gray-100 rounded-[5px] font-semibold' onClick={() => {
+                            setShowEditor(false)
+                        }}>Close</Button>
+                    </div>
+                )}
+            </div>
 
-                    <IconButtons />
-                </div>
-            )}
         </div>
     )
 }

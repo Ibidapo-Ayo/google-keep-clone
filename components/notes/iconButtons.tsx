@@ -26,7 +26,7 @@ const IconButtons = () => {
 
             <div className='flex pl-5'>
                 <Button variant={"ghost"} size={"sm"} className='rounded-full w-8 h-8 [&_svg]:size-4 [&_svg]:text-gray-700 hover:bg-gray-100 disabled:cursor-not-allowed'>
-                    <Undo2 />
+                    <Undo2 className='' />
                 </Button>
                 <Button variant={"ghost"} size={"sm"} className='rounded-full w-8 h-8 [&_svg]:size-4 [&_svg]:text-gray-700 hover:bg-gray-100 disabled:cursor-not-allowed'>
                     <Redo2 />
