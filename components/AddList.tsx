@@ -15,7 +15,7 @@ const AddList = ({ value, setNotes, index, note, active, setActive }: {
     index: number,
     note: NoteTypes,
     active: number | undefined,
-    setActive: (value:number) => void
+    setActive: (value: number) => void
 }) => {
 
     const [isTyping, setIsTyping] = useState<boolean>(false)
@@ -32,7 +32,9 @@ const AddList = ({ value, setNotes, index, note, active, setActive }: {
     return (
         <div className={`${active === index ? "border-y" : "border-none"}`}>
             <div className={`grid grid-cols-[20px,1fr,20px] gap-2 items-center px-4`} onClick={() => {
-                setIsTyping(false)
+                if (note.listValue[index].text !== "") {
+                    setIsTyping(false)
+                }
                 setActive(index)
             }} >
 
@@ -59,7 +61,11 @@ const AddList = ({ value, setNotes, index, note, active, setActive }: {
 
                 {active === index && (
                     <Button variant={"ghost"} className='rounded-full w-8 h-8 [&_svg]:size-3 hover:bg-gray-100' onClick={() => {
-
+                        if (note.listValue.length !== 1) {
+                            setNotes({ ...note, listValue: note.listValue.filter((_, i) => index !== i) })
+                        } else {
+                           setNotes({...note, listValue: [{...note.listValue[0], text: ""}, ...note.listValue.slice(1)]})
+                        }
                     }}>
                         <X className='w-3' />
                     </Button>
