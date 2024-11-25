@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
+import React, { Dispatch, SetStateAction, useRef, useState } from 'react'
 import { Input } from './ui/input'
 import { Plus, Square, X } from 'lucide-react'
 import { Button } from './ui/button'
@@ -21,14 +21,19 @@ const AddList = ({ value, setNotes, index, note, active, setActive }: {
     const [isTyping, setIsTyping] = useState<boolean>(false)
 
 
-    // let the first input of the array be active
+   
     const inputRef = useRef<HTMLInputElement | null>(null)
 
-    useEffect(() => {
-        console.log(active);
-    }, [active])
-
     const handleRemoveListItems = () => {
+        if( index === note.listValue.length -1){
+            if(index > 0){
+                setActive(index - 1)
+            }
+            inputRef.current?.focus()
+        }else if(index < note.listValue.length -1){
+            setActive(index + 1 )
+            inputRef.current?.focus()
+        }
         if (note.listValue.length !== 1) {
             setNotes({ ...note, listValue: note.listValue.filter((_, i) => index !== i) })
         } else {
@@ -63,7 +68,6 @@ const AddList = ({ value, setNotes, index, note, active, setActive }: {
                     setIsTyping(true)
 
                     if (index === note.listValue.length - 1) {
-                        console.log(note.listValue)
                         setNotes({
                             ...note, listValue: [...note.listValue, {
                                 text: "",

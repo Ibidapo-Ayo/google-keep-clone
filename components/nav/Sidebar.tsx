@@ -13,7 +13,7 @@ const Sidebar = () => {
         setActiveTab(index)
     }
     return (
-        <div className='top-20 min-h-[88vh] bg-white pr-2'>
+        <div className='top-20 min-h-[88vh] bg-white pr-2 z-20'>
             <ul className={`flex-1 space-y-1 bg-white  ${absoluteExpand && !expanded ?"absolute w-64 shadow-lg h-[88vh]" : ""} ${expanded && "w-64"}`} onMouseEnter={() => {
                 setAbsoluteExpand(true)
             }}

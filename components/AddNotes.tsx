@@ -1,14 +1,15 @@
 "use client"
-import React, { act, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
 import { preInputIcons } from '@/constants/icons'
 import { Textarea } from './ui/textarea'
 import { autoGrow, noteDefault } from '@/lib/utils'
-import { Pin, Bell } from 'lucide-react'
+import { Pin } from 'lucide-react'
 import IconButtons from './notes/iconButtons'
 import AddList from './AddList'
 import { NoteTypes } from '@/types'
+import { GoogleKeepCloneContext } from '@/context/GoogleKeepContext'
 
 
 type InputType = "note" | "list" | "image" | "brush"
@@ -19,7 +20,8 @@ const AddNotes = () => {
     const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
 
     const [note, setNotes] = useState<NoteTypes>(noteDefault)
-    const [active, setActive] = useState<number | undefined>()
+    const [active, setActive] = useState<number | undefined>(0)
+    const { setNotes: setAddNotes } = useContext(GoogleKeepCloneContext)
 
     useEffect(() => {
         document.body.addEventListener("click", (event) => {
@@ -49,10 +51,9 @@ const AddNotes = () => {
 
         if (!showEditor) {
             if (note.title.trim() || note.text.trim()) {
-                setNotes(noteDefault)
                 saveNotes()
+                setNotes(noteDefault)
             }
-
             setInputType("note")
         }
     }, [showEditor])
@@ -62,7 +63,7 @@ const AddNotes = () => {
     }
 
     const saveNotes = async () => {
-
+        setAddNotes((prev)=> [...prev, note])   
     }
 
     const handleActions = (action: string) => {
@@ -119,7 +120,7 @@ const AddNotes = () => {
                     ) : (
                         <>
                             {note.listValue.map((value, index) => (
-                                <AddList value={value} key={index} setNotes={setNotes} index={index} note={note} active={active} setActive={()=> setActive(index)} />
+                                <AddList value={value} key={index} setNotes={setNotes} index={index} note={note} active={active} setActive={setActive} />
                             ))}
                         </>
                     )
