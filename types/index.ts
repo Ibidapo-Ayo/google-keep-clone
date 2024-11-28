@@ -1,4 +1,5 @@
 export type NoteTypes = {
+    noteId: string,
     title: string; 
     text: string; 
     reminder: string; 
@@ -8,5 +9,7 @@ export type NoteTypes = {
     archive: boolean; 
     pinned: boolean; 
     isAList: boolean; 
-    listValue: { text: string; completed: boolean; }[];
+    listValue: listValueTypes[];
 }
+
+export type listValueTypes = { text: string; completed: boolean; }

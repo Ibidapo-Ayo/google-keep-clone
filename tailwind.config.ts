@@ -54,11 +54,6 @@ export default {
 		boxShadow: {
 			"custom": "0px 4px 8px rgba(0,0,0,0.19), 0 1px 3px rgba(0,0,0,0.4)"
 		},
-  		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
-  		}
   	}
   },
   plugins: [require("tailwindcss-animate")],

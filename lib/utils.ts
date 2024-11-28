@@ -14,18 +14,11 @@ export const autoGrow = (textarea: React.MutableRefObject<HTMLTextAreaElement | 
   }
 }
 
-export const noteDefault = {
-  title: "",
-  text: "",
-  reminder: "",
-  collaborator: [],
-  bgColor: "",
-  images: [],
-  archive: false,
-  pinned: false,
-  isAList: false,
-  listValue: [{
-    text: "",
-    completed: false
-  }]
+export function generateUniqueId(length = 20) {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return result;
 }
