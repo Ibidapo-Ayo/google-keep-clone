@@ -11,7 +11,9 @@ type createContextProps = {
     setNotes: React.Dispatch<React.SetStateAction<NoteTypes[]>>,
     notes: NoteTypes[],
     setSearchPrompt: React.Dispatch<React.SetStateAction<string>>,
-    searchPrompt: string
+    searchPrompt: string,
+    setColorValue: React.Dispatch<React.SetStateAction<string>>,
+    colorValue: string
 }
 
 export const GoogleKeepCloneContext = createContext<createContextProps>({
@@ -20,7 +22,9 @@ export const GoogleKeepCloneContext = createContext<createContextProps>({
     setNotes: () => [],
     notes: [],
     setSearchPrompt: () => "",
-    searchPrompt: ""
+    searchPrompt: "",
+    setColorValue: () => "",
+    colorValue: ""
 });
 
 
@@ -29,9 +33,10 @@ const GoogleKeepContextProvider = ({ children }: ContextProps) => {
     const [expanded, setExpanded] = useState(false)
     const [notes, setNotes] = useState<NoteTypes[]>([])
     const [searchPrompt, setSearchPrompt] = useState("")
+    const [colorValue, setColorValue] = useState("")
 
     return (
-        <GoogleKeepCloneContext.Provider value={{ expanded, setExpanded, setNotes, notes, searchPrompt, setSearchPrompt }}>
+        <GoogleKeepCloneContext.Provider value={{ expanded, setExpanded, setNotes, notes, searchPrompt, setSearchPrompt, setColorValue, colorValue }}>
             {children}
         </GoogleKeepCloneContext.Provider>
     )

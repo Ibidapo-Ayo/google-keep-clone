@@ -18,7 +18,20 @@ export function generateUniqueId(length = 20) {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
   let result = '';
   for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
   }
   return result;
 }
+
+
+export const colors = [
+  "#f2e9e4",
+  "#f5c9b3",
+  "#f8d7ba",
+  "#e0f2d9",
+  "#d2e9f0",
+  "#c6d9f5",
+  "#d9c9f5",
+  "#f5e6d6",
+  "#f5f5f5"
+];

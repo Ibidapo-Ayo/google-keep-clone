@@ -14,7 +14,9 @@ const Notes = ({ note, index, handleRemovePin }: NoteProps) => {
     const [hoverItem, setHoverItem] = useState<number | null>()
     const { setNotes, searchPrompt } = useContext(GoogleKeepCloneContext)
     return (
-        <div className='relative px-2 py-1 rounded-[10px] w-56 border border-gray-300  space-y-3 hover:shadow-custom hover:transition flex flex-col justify-between' onMouseEnter={() => setHoverItem(index)} onMouseLeave={() => setHoverItem(null)}>
+        <div className='relative px-2 py-1 rounded-[10px] w-56 border border-gray-300  space-y-3 hover:shadow-custom hover:transition flex flex-col justify-between' onMouseEnter={() => setHoverItem(index)} onMouseLeave={() => setHoverItem(null)} style={{
+            backgroundColor: note.color || "#fff"
+        }}>
 
             <div className='space-y-4'>
                 <div>

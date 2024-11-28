@@ -27,7 +27,7 @@ const AddNotes = () => {
     const [inputType, setInputType] = useState<InputType | string>("note")
     const [showEditor, setShowEditor] = useState<boolean>(false)
     const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
-    const { setNotes: setAddNotes, notes } = useContext(GoogleKeepCloneContext)
+    const { setNotes: setAddNotes, notes, colorValue, setColorValue } = useContext(GoogleKeepCloneContext)
 
     const noteDefault = {
         noteId: generateUniqueId(21),
@@ -43,7 +43,8 @@ const AddNotes = () => {
         listValue: [{
             text: "",
             completed: false
-        }]
+        }],
+        color: "",
     }
 
     const [note, setNotes] = useState<NoteTypes>(noteDefault)
@@ -81,6 +82,7 @@ const AddNotes = () => {
                 setNotes(noteDefault)
             }
             setInputType("note")
+            setColorValue("")
         }
     }, [showEditor])
 
@@ -89,7 +91,10 @@ const AddNotes = () => {
     }
 
     const saveNotes = async () => {
-        setAddNotes((prev) => [...prev, note])
+        setAddNotes((prev) => [...prev, {
+            ...note,
+            color: colorValue
+        }])
     }
 
     const handleActions = (action: string) => {
@@ -114,9 +119,11 @@ const AddNotes = () => {
 
 
     return (
-        <div className='max-w-xl mx-auto shadow-custom rounded-[5px] h-auto relative' id='add-tasks'>
+        <div className={`max-w-xl mx-auto shadow-custom rounded-[5px] h-auto relative transition-colors duration-1000 ease-in-out`} style={{
+            backgroundColor: colorValue || "#fff"
+        }} id='add-tasks'>
             <div className='w-full grid grid-cols-[1fr,auto] gap-4 items-center px-2 rounded-lg'>
-                <Input type='text' value={note.title} name="title" onChange={handleNotesChange} placeholder={!showEditor ? "Take a note..." : "Title"} className='note-input rounded-md' onClick={handleInputClick} />
+                <Input type='text' value={note.title} name="title" onChange={handleNotesChange} placeholder={!showEditor ? "Take a note..." : "Title"} className='note-input rounded-md shadow-none' onClick={handleInputClick} />
 
 
                 {!showEditor ? (
@@ -142,7 +149,7 @@ const AddNotes = () => {
             <div className='flex flex-col w-full px-2 space-y-3'>
                 {showEditor && (
                     inputType === "note" ? (
-                        <Textarea ref={textAreaRef} onChange={handleNotesChange} name='text' value={note.text} className='resize-none w-full note-input' placeholder='Take note' onInput={() => autoGrow(textAreaRef)} />
+                        <Textarea ref={textAreaRef} onChange={handleNotesChange} name='text' value={note.text} className='resize-none shadow-none w-full note-input' placeholder='Take note' onInput={() => autoGrow(textAreaRef)} />
                     ) : (
                         <>
                             {note.listValue.map((value, index) => (

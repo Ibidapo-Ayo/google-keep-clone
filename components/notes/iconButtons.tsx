@@ -1,6 +1,7 @@
 import React from 'react'
 import { ArchiveIcon, BellPlus, Image, MoreVertical, Palette, Redo2, Undo2, UserPlus } from 'lucide-react'
 import { Button } from '../ui/button'
+import ColorCard from '../ColorCard'
 
 const IconButtons = () => {
     return (
@@ -11,9 +12,7 @@ const IconButtons = () => {
             <Button variant={"ghost"} size={"sm"} className='rounded-full w-8 h-8 [&_svg]:size-4 [&_svg]:text-gray-700 hover:bg-gray-100 disabled:cursor-not-allowed'>
                 <UserPlus />
             </Button>
-            <Button variant={"ghost"} size={"sm"} className='rounded-full w-8 h-8 [&_svg]:size-4 [&_svg]:text-gray-700 hover:bg-gray-100 disabled:cursor-not-allowed'>
-                <Palette />
-            </Button>
+            <ColorCard />
             <Button variant={"ghost"} size={"sm"} className='rounded-full w-8 h-8 [&_svg]:size-4 [&_svg]:text-gray-700 hover:bg-gray-100 disabled:cursor-not-allowed'>
                 <Image />
             </Button>
