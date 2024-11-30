@@ -7,18 +7,18 @@ const Actions = () => {
     return (
         <div className='w-60 flex justify-end space-x-3 items-center'>
             <div className='w-full flex items-center'>
-                <Button variant="ghost" className='rounded-full w-10 h-10 [&_svg]:size-4 hover:bg-gray-100' size={"sm"}>
+                <Button variant="ghost" className='rounded-full w-10 h-10 [&_svg]:size-4 hover:bg-black hover:bg-opacity-10' size={"sm"}>
                     <RotateCcw className="text-lg" />
                 </Button>
-                <Button variant="ghost" className='md:flex hidden rounded-full w-10 h-10 [&_svg]:size-4 hover:bg-gray-100' size={"sm"}>
+                <Button variant="ghost" className='md:flex hidden rounded-full w-10 h-10 [&_svg]:size-4 hover:bg-black hover:bg-opacity-10' size={"sm"}>
                     <Grid2X2 className="text-lg" />
                 </Button>
-                <Button variant="ghost" className='rounded-full w-10 h-10 [&_svg]:size-4 hover:bg-gray-100'>
+                <Button variant="ghost" className='rounded-full w-10 h-10 [&_svg]:size-4 hover:bg-black hover:bg-opacity-10'>
                     <Settings className="text-lg" />
                 </Button>
             </div>
             <div className='flex space-x-2 items-center'>
-                <Button variant="ghost" className='rounded-full w-10 h-10 [&_svg]:size-4 hover:bg-gray-100'>
+                <Button variant="ghost" className='rounded-full w-10 h-10 [&_svg]:size-4 hover:bg-black hover:bg-opacity-10'>
                     <Grid2X2 className="text-lg" />
                 </Button>
 

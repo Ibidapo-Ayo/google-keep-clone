@@ -28,7 +28,7 @@ const Notes = ({ note, index, handleRemovePin }: NoteProps) => {
                         <h4 className="text-wrap font-medium text-black tracking-tight text-md leading-5">{TextHighlighter(note.title, searchPrompt)}</h4>
                         <div className="h-7">
                             {hoverItem === index && (
-                                <Button className={`${hoverItem === index ? "block" : "hidden"} grid items-center justify-center rounded-full hover:bg-gray-100 w-8 h-8 ${note.pinned && "bg-gray-100"}`} variant={"ghost"} size={"icon"} onClick={handleRemovePin}>
+                                <Button className={`${hoverItem === index ? "block" : "hidden"} grid items-center justify-center rounded-full hover:bg-black hover:bg-opacity-10 w-8 h-8 ${note.pinned && "bg-gray-100"}`} variant={"ghost"} size={"icon"} onClick={handleRemovePin}>
                                     <Pin className="w-4" />
                                 </Button>
                             )}
@@ -55,22 +55,22 @@ const Notes = ({ note, index, handleRemovePin }: NoteProps) => {
 
                     {hoverItem === index && (
                         <div className='flex justify-between w-full items-end'>
-                            <Button variant="ghost" size="icon" className='rounded-full [&_svg]:size-3 w-8 h-8 hover:bg-gray-100'>
+                            <Button variant="ghost" size="icon" className='rounded-full [&_svg]:size-3 w-8 h-8 hover:bg-black hover:bg-opacity-10'>
                                 <Bell className="w-2" />
                             </Button>
-                            <Button variant="ghost" size="icon" className='rounded-full [&_svg]:size-3 w-8 h-8 hover:bg-gray-100'>
+                            <Button variant="ghost" size="icon" className='rounded-full [&_svg]:size-3 w-8 h-8 hover:bg-black hover:bg-opacity-10'>
                                 <UserPlus className="w-2" />
                             </Button>
-                            <Button variant="ghost" size="icon" className='rounded-full [&_svg]:size-3 w-8 h-8 hover:bg-gray-100'>
+                            <Button variant="ghost" size="icon" className='rounded-full [&_svg]:size-3 w-8 h-8 hover:bg-black hover:bg-opacity-10'>
                                 <Palette className="w-2" />
                             </Button>
-                            <Button variant="ghost" size="icon" className='rounded-full [&_svg]:size-3 w-8 h-8 hover:bg-gray-100'>
+                            <Button variant="ghost" size="icon" className='rounded-full [&_svg]:size-3 w-8 h-8 hover:bg-black hover:bg-opacity-10'>
                                 <Image className="w-2" />
                             </Button>
-                            <Button variant="ghost" size="icon" className='rounded-full [&_svg]:size-3 w-8 h-8 hover:bg-gray-100'>
+                            <Button variant="ghost" size="icon" className='rounded-full [&_svg]:size-3 w-8 h-8 hover:bg-black hover:bg-opacity-10'>
                                 <Archive className="w-2" />
                             </Button>
-                            <Button variant="ghost" size="icon" className='rounded-full [&_svg]:size-3 w-8 h-8 hover:bg-gray-100'>
+                            <Button variant="ghost" size="icon" className='rounded-full [&_svg]:size-3 w-8 h-8 hover:bg-black hover:bg-opacity-10'>
                                 <MoreVertical className="w-2" />
                             </Button>
                         </div>

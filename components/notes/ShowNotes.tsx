@@ -14,9 +14,9 @@ const ShowNotes = () => {
 
     return (
         <div className='space-y-3'>
-            <p className="uppercase tracking-wide text-[10px] font-medium text-left">Pinned</p>
+            <p className="uppercase tracking-wide text-[10px] f ont-medium text-left">Pinned</p>
             <div className={`grid  ${expanded ? "grid-cols-4" : "grid-cols-5"} gap-5 items-start`}>
-                {filterPinned(notes).length < 1 ? "No pinnned" : filterPinned(notes).map((note, index) => {
+                {filterPinned(notes).length < 1 ? <p className='text-sm tracking-tight'>No pinnned</p> : filterPinned(notes).map((note, index) => {
                     return (
                         <Notes index={index} note={note} key={index} handleRemovePin={() => handleRemovePin(note.noteId, setNotes)} />
                     )
@@ -25,7 +25,7 @@ const ShowNotes = () => {
 
             <p className="uppercase tracking-wide text-[10px] font-medium text-left">Others</p>
             <div className={`grid  ${expanded ? "grid-cols-4" : "grid-cols-5"} gap-5 items-start`}>
-                {notes.filter((arr) => arr.pinned !== true).length === 0 ? "No tasks" : notes.filter((arr) => !arr.pinned).map((note, index) => {
+                {notes.filter((arr) => arr.pinned !== true).length === 0 ? <p className='text-sm tracking-tight'>No pinnned</p> : notes.filter((arr) => !arr.pinned).map((note, index) => {
                     return (
                         <Notes index={index} note={note} key={index} handleRemovePin={() => handleRemovePin(note.noteId, setNotes)} />
                     )

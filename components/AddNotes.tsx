@@ -10,9 +10,10 @@ import IconButtons from './notes/iconButtons'
 import AddList from './AddList'
 import { NoteTypes } from '@/types'
 import { GoogleKeepCloneContext } from '@/context/GoogleKeepContext'
+import Collaborator from './Collaborator'
 
 
-type InputType = "note" | "list" | "image" | "brush"
+type InputType = "note" | "list" | "image" | "brush" | "collaborators"
 
 
 
@@ -117,9 +118,12 @@ const AddNotes = () => {
         setNotes({ ...note, pinned: !note.pinned })
     }
 
+    const handleCollaborator = () => {
+        setInputType("collaborators")
+    }
 
     return (
-        <div className={`max-w-xl mx-auto shadow-custom rounded-[5px] h-auto relative transition-colors duration-1000 ease-in-out`} style={{
+        <div className={`max-w-xl mx-auto shadow-custom rounded-[5px] h-full relative transition-colors duration-1000 ease-in-out`} style={{
             backgroundColor: colorValue || "#fff"
         }} id='add-tasks'>
             <div className='w-full grid grid-cols-[1fr,auto] gap-4 items-center px-2 rounded-lg'>
@@ -132,7 +136,7 @@ const AddNotes = () => {
                             const { Icon, action } = icon
 
                             return (
-                                <Button key={index} variant={"ghost"} size={"sm"} className={`rounded-full w-10 h-10 [&_svg]:size-5 [&_svg]:text-gray-500 hover:bg-gray-100 disabled:cursor-not-allowed`} disabled={action === "not-allowed"} onClick={() => handleActions(action)}>
+                                <Button key={index} variant={"ghost"} size={"sm"} className={`rounded-full w-10 h-10 [&_svg]:size-5 [&_svg]:text-gray-500 hover:bg-black hover:bg-opacity-10 disabled:cursor-not-allowed`} disabled={action === "not-allowed"} onClick={() => handleActions(action)}>
                                     <Icon />
                                 </Button>
                             )
@@ -140,7 +144,7 @@ const AddNotes = () => {
                     </div>
 
                 ) : (
-                    <Button onClick={handlePinHandle} variant={"ghost"} size={"icon"} className={`rounded-full w-10 h-10 [&_svg]:size-5 [&_svg]:text-gray-500 hover:bg-gray-100 ${note.pinned && "bg-gray-100"}`}>
+                    <Button onClick={handlePinHandle} variant={"ghost"} size={"icon"} className={`rounded-full w-10 h-10 [&_svg]:size-5 [&_svg]:text-gray-500 hover:bg-black hover:bg-opacity-10 ${note.pinned && "bg-gray-100"}`}>
                         <Pin />
                     </Button>
                 )}
@@ -161,15 +165,20 @@ const AddNotes = () => {
 
                 {showEditor && (
                     <div className='flex items-center justify-between pb-2'>
-                        <IconButtons />
-                        <Button variant={"ghost"} size={"sm"} className='hover:bg-gray-100 rounded-[5px] font-semibold' onClick={() => {
+                        <IconButtons handleCollaborator={handleCollaborator} />
+                        <Button variant={"ghost"} size={"sm"} className='hover:bg-black hover:bg-opacity-10 rounded-[5px] font-semibold' onClick={() => {
                             setShowEditor(false)
                         }}>Close</Button>
                     </div>
                 )}
             </div>
 
+            {inputType === "collaborators" && (
+                <Collaborator />
+            )}
         </div>
+
+
     )
 }
 

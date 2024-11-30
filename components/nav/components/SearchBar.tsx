@@ -30,9 +30,9 @@ const SearchBar = () => {
             setBg(false)
         }}>
             <Search className='text-gray-500 w-4' />
-            <Input className="note-input border-none outline-none placeholder:tracking-wide placeholder:text-gray-500" value={searchPrompt} onChange={(e) => setSearchPrompt(e.target.value)} placeholder='Search...' />
+            <Input className="note-input border-none outline-none shadow-none placeholder:tracking-wide placeholder:text-gray-500" value={searchPrompt} onChange={(e) => setSearchPrompt(e.target.value)} placeholder='Search...' />
             {!bg && (
-                <Button variant={"ghost"} size={"sm"} className='rounded-full w-10 h-10 [&_svg]:size-5 hover:bg-gray-100' onClick={()=>{
+                <Button variant={"ghost"} size={"sm"} className='rounded-full w-10 h-10 [&_svg]:size-5 hover:bg-black hover:bg-opacity-10' onClick={()=>{
                     setSearchPrompt("")
                     setBg((prev) => !prev)}}
                     

@@ -25,7 +25,7 @@ const Sidebar = () => {
                     const { text, Icon } = items
                     return (
                         <li
-                            key={index} className={`sidebar ${activeTab === index ? "bg-amber-100 hover:bg-amber-100" : "hover:bg-gray-100"} ${expanded || absoluteExpand ? "rounded-r-full w-full h-12" : "w-12 h-12 rounded-full text-center flex justify-center items-center"} `} onClick={() => handleActiveTab(index)}>
+                            key={index} className={`sidebar ${activeTab === index ? "bg-amber-100 hover:bg-amber-100" : "hover:bg-black hover:bg-opacity-10"} ${expanded || absoluteExpand ? "rounded-r-full w-full h-12" : "w-12 h-12 rounded-full text-center flex justify-center items-center"} `} onClick={() => handleActiveTab(index)}>
                             <div className={``}>
                                 <Icon className={`${!expanded && absoluteExpand && "ml-1"} w-5`} />
                             </div>

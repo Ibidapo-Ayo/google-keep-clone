@@ -18,7 +18,7 @@ const ColorCard = () => {
     return (
         <HoverCard>
             <HoverCardTrigger>
-                <Button variant={"ghost"} size={"sm"} className='rounded-full w-8 h-8 [&_svg]:size-4 [&_svg]:text-gray-700 hover:bg-gray-100 disabled:cursor-not-allowed'>
+                <Button variant={"ghost"} size={"sm"} className='rounded-full w-8 h-8 [&_svg]:size-4 [&_svg]:text-gray-700 hover:bg-black hover:bg-opacity-10 disabled:cursor-not-allowed'>
                     <Palette />
                 </Button>
             </HoverCardTrigger>
