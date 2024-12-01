@@ -1,10 +1,13 @@
 import { NoteTypes } from '@/types'
-import { Archive, Bell, Check, Image, MoreVertical, Palette, Pin, UserPlus } from 'lucide-react'
+import { Archive, Bell, Check, ImageIcon, MoreVertical, Palette, Pin, UserPlus } from 'lucide-react'
 import React, { useContext, useState } from 'react'
 import { Button } from '../ui/button'
 import ShowList from './ShowList'
 import { GoogleKeepCloneContext } from '@/context/GoogleKeepContext'
 import { TextHighlighter } from '../AddNotes'
+import Image from "next/image"
+
+
 type NoteProps = {
     note: NoteTypes,
     index: number,
@@ -51,6 +54,18 @@ const Notes = ({ note, index, handleRemovePin }: NoteProps) => {
                     </div>
                 </div>
 
+                <div className='flex space-x-3'>
+                    {note.collaborator.length !== 0 && (
+                        note.collaborator.map((col, index) => {
+                            return (
+                                <div className='w-5 h-5 rounded-full' key={col.id}>
+                                    <Image src={"/profile_pic_2.jpg"} alt='Profile pic' width={1000} height={1000} className='w-full h-full object-cover   rounded-full ring-2 ring-gray-100 ring-offset-2 ring-offset-white' />
+                                </div>
+                            )
+                        })
+                    )}
+                </div>
+
                 <div className='flex flex-row h-7 shrink-0 items-end w-full'>
 
                     {hoverItem === index && (
@@ -65,7 +80,7 @@ const Notes = ({ note, index, handleRemovePin }: NoteProps) => {
                                 <Palette className="w-2" />
                             </Button>
                             <Button variant="ghost" size="icon" className='rounded-full [&_svg]:size-3 w-8 h-8 hover:bg-black hover:bg-opacity-10'>
-                                <Image className="w-2" />
+                                <ImageIcon className="w-2" />
                             </Button>
                             <Button variant="ghost" size="icon" className='rounded-full [&_svg]:size-3 w-8 h-8 hover:bg-black hover:bg-opacity-10'>
                                 <Archive className="w-2" />
