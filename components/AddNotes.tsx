@@ -126,6 +126,7 @@ const AddNotes = () => {
     const handleCollaboratorActions = (action: "save" | "cancel", value?: CollaboratorTypes[]) => {
         if (action === "cancel") {
             setInputType("note")
+            setNotes(noteDefault)
             return
         }
 
@@ -199,6 +200,7 @@ const AddNotes = () => {
                                 <IconButtons handleCollaborator={handleCollaborator} />
                                 <Button variant={"ghost"} size={"sm"} className='hover:bg-black hover:bg-opacity-10 rounded-[5px] font-semibold' onClick={() => {
                                     setShowEditor(false)
+                                    setNotes(noteDefault)
                                 }}>Close</Button>
                             </div>
                         )}
