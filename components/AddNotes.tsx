@@ -138,6 +138,11 @@ const AddNotes = () => {
         }
     }
 
+    const handleClose = () => {
+        setShowEditor(false)
+        setNotes(noteDefault)
+    }
+
     return (
         <div className='max-w-xl mx-auto'>
             {inputType !== "collaborators" && (
@@ -198,10 +203,7 @@ const AddNotes = () => {
                         {showEditor && (
                             <div className='flex items-center justify-between pb-2'>
                                 <IconButtons handleCollaborator={handleCollaborator} />
-                                <Button variant={"ghost"} size={"sm"} className='hover:bg-black hover:bg-opacity-10 rounded-[5px] font-semibold' onClick={() => {
-                                    setShowEditor(false)
-                                    setNotes(noteDefault)
-                                }}>Close</Button>
+                                <Button variant={"ghost"} size={"sm"} className='hover:bg-black hover:bg-opacity-10 rounded-[5px] font-semibold' onClick={handleClose}>Close</Button>
                             </div>
                         )}
                     </div>
